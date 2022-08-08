@@ -14,6 +14,6 @@ Hello,Welcome to the RedTeam-TG Cyber Security blog. We are CTF team participati
 - **Skills:**  `CTF's / Red Teaming / Offensive & Defensive Security `
 - **GitHub:**     `https://github.com/RedTeam-TG`
 
-## **Hackerlab2022_Writeups:-**
+## **CTF_Writeups:-**
 
 
