@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-## **welcome to the RedTeam-TG cyber Security Blog**
+## **Welcome To The RedTeam-TG Cyber Security Blog**
 
 Hello,Welcome to the RedTeam-TG Cyber Security blog. We are CTF team participating on National and international capture the flag .we publish here various tips on hacking,CTF's writeups, in short everything related to Ethical hacking.. we are happy to share our blog with you, thank you.
 
@@ -16,5 +16,4 @@ Hello,Welcome to the RedTeam-TG Cyber Security blog. We are CTF team participati
 
 ## **Hackerlab2022_Writeups:-**
 
-- 
 
