@@ -1,4 +1,9 @@
-## Ecowas Chall
+---
+layout: default
+title : Redteam-TG -Ecowas Portal Writeup
+---
+
+## Ecowas Portal
 
 ```
 Is my program secure?
