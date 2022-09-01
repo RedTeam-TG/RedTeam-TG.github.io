@@ -111,7 +111,7 @@ CTF_AAAAAAAAAAAAAAAAAAAAA
 
 ```
 Let's continue with our next instruction command
-At this point the program the program subtracts 1 from the value of rax(the result of the strlen() function), compares rax to rbx 0 then jump if below. it is clearly a loop that will iterate until 25 (the length of our flag)
+At this point the program subtracts `1` from the value of rax(the result of the strlen() function), compares rax to rbx `0` then jump if below. it is clearly a loop that will iterate until 25 (the length of our flag)
 
 ```
 (gdb) info registers 
@@ -214,7 +214,7 @@ At this stage the values are equal and our program can continue its execution.
 (gdb) p/x $al
 $12 = 0x2f
 
-(gdb) x/x $rbp-0x21
+(gdb) x/b $rbp-0x21
 0x7fffffffdebf: 0x2f
 ```
 
@@ -233,10 +233,24 @@ Starting program: /home/kali/CTFs/HackerlabCTF/Basic/Ecowas/ecowas_portal
 ECOWAS ADMIN PORTAL : 
 CTF_AAAAAAAAAAAAAAAAAAAAA
 
---snip--
-
+gdb) c
+Continuing.
+Breakpoint 3, 0x000055555555531c in main ()
+(gdb) p $esi
+$2 = 0
+(gdb) p $edi
+$3 = 67
 (gdb) c
 Continuing.
+
+Breakpoint 4, 0x000055555555532b in main ()
+(gdb) x/b $rbp-0x21
+0x7fffffffdebf: 0x2f
+(gdb) p/x $al
+$4 = 0x2f
+(gdb) c
+Continuing.
+
 Breakpoint 3, 0x000055555555531c in main ()
 (gdb) p $esi
 $5 = 1
@@ -246,12 +260,13 @@ $6 = 84
 Continuing.
 
 Breakpoint 4, 0x000055555555532b in main ()
-(gdb) x/x $rbp-0x21
-0x7fffffffdebf: 0x00001941
+(gdb) x/b $rbp-0x21
+0x7fffffffdebf: 0x41
 (gdb) p/x $al
 $7 = 0x41
 (gdb) c
 Continuing.
+
 Breakpoint 3, 0x000055555555531c in main ()
 (gdb) p $esi
 $8 = 2
@@ -259,12 +274,28 @@ $8 = 2
 $9 = 70
 (gdb) c
 Continuing.
+
 Breakpoint 4, 0x000055555555532b in main ()
 (gdb) p/x $al
 $10 = 0x30
-(gdb) x/x $rbp-0x21
-0x7fffffffdebf: 0x00001930
+(gdb) x/b $rbp-0x21
+0x7fffffffdebf: 0x30
+
+Breakpoint 3, 0x000055555555531c in main ()
+(gdb) p $esi
+$11 = 3
+(gdb) p $edi
+$12 = 95
+(gdb) c
+Continuing.
+
+Breakpoint 4, 0x000055555555532b in main ()
+(gdb) p/x $al
+$13 = 0x48
+(gdb) x/b $rbp-0x21
+0x7fffffffdebf: 0x48
 (gdb) 
+
 
 ```
 Have you noticed anything?
@@ -275,11 +306,14 @@ Yes, the byte of the value at memory address [rbp-0x21] to which the value of th
 ```
 └─$ python 
 >>>
+>>> chr(67)
+'C'
 >>> chr(84)
 'T'
->>> 
 >>> chr(70)
 'F'
+>>> chr(95)
+'_'
 >>> 
 ```
 
@@ -291,12 +325,14 @@ The program declares and initializes a bunch of variables, then it asks for a us
 Now that we know how the program works, we can reverse it. 
 I have written a python program to do this.
 
+I converted to decimal the first 25 variables that our program initializes that I stored in a list then I browse the list by doing the reverse of what the encrypt function does.
+
 ```
+#!/usr/bin/env python3
 from pwn import xor
 
 variables = [47,65,48,72,74,37,39,26,39,87,21,73,16,45,17,43,12,14,12,55,11,11,10,10,6]
-flag=""
-i=0
+flag=''
 
 for i in range(len(variables)):
    flag=flag+chr(ord(xor(variables[i],i))+20)
