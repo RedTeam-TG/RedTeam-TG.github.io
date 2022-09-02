@@ -32,7 +32,7 @@ since I don't even know what encoding it is I got 2 options
 *option 1 [Cyberchef](https://gchq.github.io/CyberChef/) and option 2 [decode](https://www.dcode.fr/identification-chiffrement)*. This time I choose option 2, and since the content is quite large I copy a part that I try to identify..Bingo!!! decode says it's JSFuck.
 
 Here we are. This is a javascript code. How to run it? 
-My approach, although a bit long, i create a `.js file`, log the result of the code in a console with `console.log()`and also create an html code in which I call my javascript file and the browser does the rest.
+My approach, although a bit long, i create a `.js file`, log the result of the code in a console with `console.log()` and also create an html code in which I call my javascript file and the browser does the rest.
 
 ```
 cipher = [67, 85, 68, 92, 55, 49, 51, 94, 90, 56, 109, 99, 59, 50, 63, 61, 35, 37] var f = "" function xor_xor(x,y){ return x ^ y; } for (var i=0; i < cipher.length ; i++){ f+= xor_xor(cipher[i] ^ i); }
