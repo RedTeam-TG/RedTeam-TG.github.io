@@ -1,5 +1,7 @@
-
-
+---
+layout: default
+title : Redteam-TG -JSFuck Writeup
+---
 
 ## JSFuck challenge
 
