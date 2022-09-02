@@ -19,8 +19,8 @@ For this challenge we are given a pdf document that we have to read. Easy, just 
 Let's open our file to get the flag and validate our gift points. 
 
 ```
-──(kali㉿kali)-[~/CTFs/HackerlabCTF/Basic/pdf]
-└─$ evince secret.pdf 
+ ┌──(kali㉿kali)-[~/CTFs/HackerlabCTF/Basic/pdf]
+ └─$ evince secret.pdf  
 ```
 
 Ooh We need a password to read the content of our document. I knew that they weren't the gift-giving type. 
@@ -41,7 +41,7 @@ secret.pdf:$pdf$4*4*128*-1060*1*16*15c0aee17f397540bdec4edb020a2247*32*447e5ab47
 it should be noted that with python3 you will have rather this. 
 
 ```
-──(kali㉿kali)-[~/CTFs/HackerlabCTF/Basic/pdf]
+┌──(kali㉿kali)-[~/CTFs/HackerlabCTF/Basic/pdf]
 └─$ python pdf2john secret.pdf                                         
 b'secret.pdf':b'$pdf$4*4*128*-1060*1*16*15c0aee17f397540bdec4edb020a2247*32*447e5ab472a0d9557b9f8664bb73c00900000000000000000000000000000000*32*cc34bdea75a5d9ac0346d4a2adcb39ac72d8aeb6dc275e4b187fb19d3cdd2cf1':::::b'secret.pdf'
 
