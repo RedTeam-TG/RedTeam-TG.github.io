@@ -3,7 +3,7 @@ layout: default
 title : Redteam-TG -Secret_PDF Writeup
 ---
 
-## Secret PDF Chall
+## Secret PDF Challenge
 
 ```
 Secret PDF
