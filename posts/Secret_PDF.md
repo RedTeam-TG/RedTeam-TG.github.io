@@ -1,3 +1,7 @@
+---
+layout: default
+title : Redteam-TG -Secret_PDF Writeup
+---
 
 ## Secret PDF Chall
 
