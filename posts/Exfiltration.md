@@ -3,7 +3,7 @@ layout: default
 title : Redteam-TG -Exfiltration Writeup
 ---
 
-## Exfiltration Chall
+## Exfiltration Challenge
 
 The first 300pts challenge...Thanks to `manas3` for bringing this prize to our team.
 
