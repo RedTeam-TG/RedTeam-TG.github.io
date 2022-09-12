@@ -20,3 +20,4 @@ Hello,Welcome to the RedTeam-TG Cyber Security blog. We are CTF team participati
 - [Hackerlab2022 -Youtube](https://redteam-tg.github.io/posts/youtube.html) *Basic*
 - [Hackerlab2022 -JSFuck](https://redteam-tg.github.io/posts/JSFuck.html) *Basic*
 - [Hackerlab2022 -Secret_PDF](https://redteam-tg.github.io/posts/Secret_PDF.html) *Basic*
+- [Hackerlab2022 -Exfiltration](https://redteam-tg.github.io/posts/Exfiltration.html) *Meduim*
