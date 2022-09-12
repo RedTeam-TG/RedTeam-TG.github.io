@@ -1,3 +1,7 @@
+---
+layout: default
+title : Redteam-TG -Exfiltration Writeup
+---
 
 ## Exfiltration Chall
 
