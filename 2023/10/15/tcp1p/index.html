@@ -1,0 +1,624 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+
+<!-- Mirrored from l3ak.team/2023/10/15/tcp1p/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 May 2025 17:30:22 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="../../../../img/fluid.png">
+  <link rel="icon" href="../../../../members/flag.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rabbitsthecat">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Writeup for Invitation - One of the blockchain challenges in TCP1PCTF 2023.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP1PCTF 2023 - [Invitation] - Blockchain">
+<meta property="og:url" content="http://example.com/2023/10/15/tcp1p/index.html">
+<meta property="og:site_name" content="L3ak">
+<meta property="og:description" content="Writeup for Invitation - One of the blockchain challenges in TCP1PCTF 2023.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="../../../../../example.com/images/tcp1p/thumb.html">
+<meta property="article:published_time" content="2023-10-16T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-04-03T13:41:42.779Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="../../../../../example.com/images/tcp1p/thumb.html">
+  
+  
+  
+  <title>TCP1PCTF 2023 - [Invitation] - Blockchain - L3ak</title>
+
+  <link  rel="stylesheet" href="../../../../../lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="../../../../../lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="../../../../../lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="../../../../../lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="../../../../../at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="../../../../../at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="../../../../css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="../../../../css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="../../../../css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="../../../../js/utils.js" ></script>
+  <script  src="../../../../js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="../../../../index.html">
+      <strong>L3ak CTF 🚩</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../index.html" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="../../../../members/index.html" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>Members</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('../../../../null.html') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="TCP1PCTF 2023 - [Invitation] - Blockchain"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Rabbitsthecat
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-15 20:00" pubdate>
+          October 15, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          124 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          2 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">TCP1PCTF 2023 - [Invitation] - Blockchain</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Invitation"><a href="#Invitation" class="headerlink" title="Invitation"></a>Invitation</h1><p><img src="../../../../images/tcp1p/init.png" srcset="/img/loading.gif" lazyload alt="chall"></p>
+<div class="note note-danger">
+            <p><strong>Difficulty:</strong> <strong>Hard</strong><br><strong>Category:</strong> <strong>Blockchain</strong><br><strong>Flag:</strong> <strong><code>TCP1P{4_Bytes_SigNAtuRe_aS_4n_Invitation_congratz}</code></strong></p>
+          </div>
+
+<p>We are given some bytecode in <code>101.txt</code>, and the challenge details in <code>101.txt</code> are as follows:</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs livescript">Description:<br>    You are provided a bytecode there, yeah?<br>    Find out a way <span class="hljs-keyword">to</span> get a certain <span class="hljs-keyword">function</span> name <span class="hljs-keyword">from</span> <span class="hljs-literal">it</span>,<br>    the correct <span class="hljs-keyword">function</span> name begin <span class="hljs-keyword">with</span> <span class="hljs-string">&quot;TCP1P&quot;</span> string.<br><br>Flag Format<br>    <span class="hljs-keyword">if</span> you manage <span class="hljs-keyword">to</span> find the correct <span class="hljs-keyword">function</span> name<br>    <span class="hljs-keyword">do</span> the exact same thing <span class="hljs-keyword">as</span> the example below<br>    <br>    Found <span class="hljs-built_in">Function</span> name: TCP1P_th1s_1s_4_fl4g_<span class="hljs-function"><span class="hljs-params">()</span></span><br><span class="hljs-function">        -&gt;</span> remove the <span class="hljs-string">&quot;()&quot;</span><br>        -&gt; replace the first <span class="hljs-string">&quot;_&quot;</span> <span class="hljs-keyword">with</span> <span class="hljs-string">&quot;&#123;&quot;</span><br>        -&gt; replace the last <span class="hljs-string">&quot;_&quot;</span> <span class="hljs-keyword">with</span> <span class="hljs-string">&quot;&#125;&quot;</span><br>    <br>    Final <span class="hljs-keyword">and</span> Right flag format: TCP1P&#123;th1s_1s_4_fl4g&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Decompiling-the-Bytecode"><a href="#Decompiling-the-Bytecode" class="headerlink" title="Decompiling the Bytecode"></a>Decompiling the Bytecode</h3><p>First, let us decompile the bytecode. We head over to the <a target="_blank" rel="noopener" href="https://library.dedaub.com/decompile">Dedaub decompiler</a> to decompile our bytecode. What we get is a mess, but we do see some strings in the decompiled code that hint towards using <code>Function DB</code>.</p>
+<p><img src="../../../../images/tcp1p/image4.png" srcset="/img/loading.gif" lazyload alt="bc"></p>
+<p>Since the decompiled code wasn’t that helpful to us, let’s try another decompiler and hope it gives a better result. After pasting our bytecode into <a target="_blank" rel="noopener" href="https://etherscan.io/bytecode-decompiler">Etherscan’s decompiler</a>, we indeed get some decompiled code, but wait a second, what’s this message?</p>
+<p><img src="../../../../images/tcp1p/Image2.png" srcset="/img/loading.gif" lazyload alt="decompiling"></p>
+<p>Alright, whatever you say, Etherscan. We remove the construct prefix accordingly, and here’s a part of the decompiled result: </p>
+<p><img src="../../../../images/tcp1p/Image3.png" srcset="/img/loading.gif" lazyload></p>
+<p>Huh, that’s interesting. The code is comparing <code>var0</code> to a bunch of 4-byte values, and they somehow correspond to functions (for example, <code>0x3d8a63e4</code> apparently corresponds to <code>scam()</code>). Here, we take a wild guess that these 4-byte values are the function signatures of all the functions available in the contract. </p>
+<p>Indeed, we can verify our guess by calculating the signature of <code>scam()</code> ourselves!</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">from</span> Crypto.Hash <span class="hljs-keyword">import</span> keccak<br>k = keccak.new(digest_bits = <span class="hljs-number">256</span>)<br>k.update(<span class="hljs-string">b&#x27;scam()&#x27;</span>)<br><span class="hljs-built_in">print</span>(k.hexdigest()[:<span class="hljs-number">8</span>]) <span class="hljs-comment"># &#x27;3d8a63e4&#x27;, which matches 0x3d8a63e4 !</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Function-DB"><a href="#Function-DB" class="headerlink" title="Function DB?"></a>Function DB?</h3><p>Now that we have a bunch of function signatures, we can just brute-force all possible functions until we get the flag, right?<br>No! Brute-forcing is obviously infeasible, so we turn to the next best option - <code>Function DB</code>. </p>
+<p><code>Function DB</code> a.k.a <a target="_blank" rel="noopener" href="https://www.4byte.directory/">Ethereum Signature Database</a> is a database that contains over a million function signatures and their corresponding human-readable representation.<br>For example, searching for <code>0x3d8a63e4</code> gives you <code>scam()</code>.</p>
+<p><img src="../../../../images/tcp1p/Image5.png" srcset="/img/loading.gif" lazyload></p>
+<p>The next logical step would be to try all the function signatures and hope we find something in <code>Function DB</code>. And indeed we do!</p>
+<p><img src="../../../../images/tcp1p/Image6.png" srcset="/img/loading.gif" lazyload></p>
+<p>We found the flag!</p>
+<p><img src="../../../../images/tcp1p/cleared.png" srcset="/img/loading.gif" lazyload></p>
+<p>Was a very fun category, me and my team enjoyed this ctf a lot! Till next time.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="../../../../2024/01/14/uoftctf24/index.html" title="UofT CTF 2024 - [Zero] - Jail">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">UofT CTF 2024 - [Zero] - Jail</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="../../../06/17/nahamctf23/index.html" title="NahamconCTF - [Signed Jeopardy] - Crypto">
+                        <span class="hidden-mobile">NahamconCTF - [Signed Jeopardy] - Crypto</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io/" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="../../../../../lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="../../../../../lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="../../../../../lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="../../../../../lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="../../../../js/events.js" ></script>
+<script  src="../../../../js/plugins.js" ></script>
+
+
+  <script  src="../../../../../lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="../../../../js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('../../../../../lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=../../../../../lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('../../../../../lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('../../../../../lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="../../../../../lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="../../../../js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="../../../../js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+
+<!-- Mirrored from l3ak.team/2023/10/15/tcp1p/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 19 May 2025 17:30:24 GMT -->
+</html>
