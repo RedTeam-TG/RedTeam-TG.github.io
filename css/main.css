@@ -210,6 +210,27 @@ h6:hover > .anchorjs-link {
 .footer-inner .beian > * {
   margin: 0 0.25rem;
 }
+.section-divider {
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, #0ff, #29d, #0ff);
+  margin: 4rem auto;
+  width: 60%;
+  position: relative;
+}
+
+.section-divider::after {
+  content: "💻";
+  position: absolute;
+  top: -1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1e1e1e; /* Adapt to your background */
+  padding: 0 10px;
+  font-size: 1.5rem;
+}
+
+
 .footer-inner .beian-police {
   position: relative;
   overflow: hidden;
