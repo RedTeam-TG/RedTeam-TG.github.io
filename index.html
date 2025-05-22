@@ -399,6 +399,18 @@ Une équipe d'experts et de passionnés de cybersécurité.
   <noscript>
     <div class="noscript-warning">Blog works best with JavaScript enabled</div>
   </noscript>
+
+	<script>
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const preloader = document.getElementById('preloader');
+      preloader.style.opacity = '0';
+      preloader.style.transition = 'opacity 0.5s ease';
+      setTimeout(() => preloader.style.display = 'none', 500);
+    }, 5000); // 5 secondes
+  });
+</script>
+
 </body>
 
 </html>
