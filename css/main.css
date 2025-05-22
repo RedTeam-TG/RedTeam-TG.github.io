@@ -1,3 +1,23 @@
+.member-card {
+  text-align: center;
+  margin: 30px auto;
+}
+
+.member-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.member-card h3,
+.member-card h6 {
+  margin: 10px 0;
+}
+
+
+
 .anchorjs-link {
   text-decoration: none !important;
   transition: opacity 0.2s ease-in-out;
