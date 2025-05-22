@@ -1,402 +1,124 @@
-
-
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
-
-
-
-
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="img/fluid.png">
-  <link rel="icon" href="members/flag.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
-  <meta name="keywords" content="">
-  
-    <meta property="og:type" content="website">
-<meta property="og:title" content="RedTeam-TG">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="RedTeam-TG">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>RedTeam-TG</title>
-
-  <link  rel="stylesheet" href="../lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-
-
-
-
-<link rel="stylesheet" href="../at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="../at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":50,"cursorChar":"|","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+  <title>REDTEAM-TG</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      background: #000000;
     }
-  </script>
-  <script  src="js/utils.js" ></script>
-  <script  src="js/color-schema.js" ></script>
-  
 
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
 
-  
-<meta name="generator" content="Hexo 7.1.1"></head>
+    @keyframes zoom-loop {
+      0%, 100% {
+        transform: translateX(-50%) translateY(-50%) scale(1);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-50%) scale(1.1);
+      }
+    }
 
+    .title {
+      animation: zoom-loop 2s ease-in-out infinite;
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      text-align: center;
+      font-family: "Montserrat", sans-serif;
+      color: #EEE;
+      user-select: none;
+      z-index: 10;
+      text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
+    }
 
+    .title h1 {
+      font-weight: 900;
+      font-size: 65px;
+      margin: 0;
+    }
+
+    .title h3 {
+      font-weight: 600;
+      font-size: 20px;
+      margin: 0;
+      letter-spacing: 2px;
+      text-shadow: 0 0 40px #000155;
+    }
+  </style>
+</head>
 <body>
 
+  <canvas id="matrix"></canvas>
 
-  <header>
-    
-
-<div class="header-inner" style="height: 65vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">
-      <strong>RedTeam-TG 🚩</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="index.html" target="_self">
-                <i class="iconfont icon-home-fill"></i>
-                <span>Accueil</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="members/index.html" target="_self">
-                <i class="iconfont icon-user-fill"></i>
-                <span>Membres</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
-    </div>
+  <div class="title">
+    <h1>REDTEAM-TG</h1>
   </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('null.html') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="RedTeam-TG&lt;br&gt;
-Une équipe d'experts et de passionnés de cybersécurité.
-"></span>
-          
-        </div>
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<h2 class="text-center mb-4">Classements</h2>
-	<br>
-              <div class="row mx-auto index-card">
-                <div class="col-12 col-md-4 m-auto index-img">
-                  <a href="images/hk.png"><img src="images/hk.png" alt="Hackerlab"></a>
-                </div>
-                <article class="col-12 col-md-8 mx-auto index-info">
-                  <h3 class="index-header"><a href="https://ctf.hackerlab.bj/scoreboard" target="_blank">🥇 1ère place - Hackerlab CTF 2025 Qualif</a></h3>
-                  <p style="text-align: justify;">Encore une très belle performance de notre équipe lors de notre participation au Hakerlab 2025.</p>
-                </article>
-              </div>
-
-              <div class="row mx-auto index-card">
-                <div class="col-12 col-md-4 m-auto index-img">
-                  <a href="images/eco.png"><img src="images/eco.png" alt="Ecowas"></a>
-                </div>
-                <article class="col-12 col-md-8 mx-auto index-info">
-                  <h3 class="index-header"><a href="https://ecowasctf.ng/" target="_blank">🏅 4ième place - Ecowas CTF 2024</a></h3>
-                  <p style="text-align: justify;">Fiers de la performance exceptionnelle réalisée par notre équipe lors de l’ECOWAS CTF 2024, où nous avons décroché une 4ᵉ place avec un score de 510 points, à égalité avec les trois premières équipes.</p>
-                </article>
-              </div>
-
-      <div class="row mx-auto index-card">
-                <div class="col-12 col-md-4 m-auto index-img">
-                  <a href="images/cy.png"><img src="images/cy.png" alt="Sub-saharan ctf 2023"></a>
-                </div>
-                <article class="col-12 col-md-8 mx-auto index-info">
-                  <h3 class="index-header"><a href="https://cyberlympics.africa/" target="_blank">🥈 2ième place - Cyberlympics CTF 2023 Qualif</a></h3>
-                  <p style="text-align: justify;">Notre équipe a terminé à la 2ᵉ place lors de la phase de qualification en ligne de 24 heures, face à des équipes issues des 54 pays africains éligibles. Une belle réussite qui témoigne de notre engagement.</p>
-                </article>
-              </div>
-		      
-		      <div class="row mx-auto index-card">
-                <div class="col-12 col-md-4 m-auto index-img">
-                  <a href="images/sub.png"><img src="images/sub.png" alt="Sub-saharan ctf 2023"></a>
-                </div>
-                <article class="col-12 col-md-8 mx-auto index-info">
-                  <h3 class="index-header"><a href="https://cybertalents.com/competitions/sub-saharan-africa-regional-cybersecurity-ctf-2023/teams" target="_blank">🥉 3ième place - Sub-Saharan CTF 2023</a></h3>
-                  <p style="text-align: justify;">Une belle réussite de notre équipe lors du Sub-Saharan CTF 2023, où nous avons décroché une 3ᵉ place parmi plus de 150 équipes d'Afrique sub saharienne et près de 800 participants.</p>
-                </article>
-              </div>
-			  <hr class="section-divider">
-
-              <h2 class="text-center my-5">🗓️ Événements à Venir</h2>
-
-              <div class="row mx-auto index-card">
-                <article class="col-12 col-md-12 mx-auto index-info text-center">
-                  <h5 class="index-header">🔸Ecowas CTF 2025 - Qualif</h5>
-                  <p>Date : Août 2025</p>
-                </article>
-              </div>
-              <hr class="section-divider">
-			  
-              <h2 class="text-center my-5">📝 Writeups</h2>
-			  
-		        <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="https://hackmd.io/@RedTeamTG/acdfctf-final-2023" target="_blank">
-          <img src="images/uhuh.png" srcset="/img/loading.gif" lazyload alt="">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="https://hackmd.io/@RedTeamTG/acdfctf-final-2023" target="_blank">
-          Final ACDF Cyberlympics CTF 2023
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt " href="https://hackmd.io/@RedTeamTG/acdfctf-final-2023" target="_blank">
-        <div style="text-align: justify;">
-          Quelques solutions à certains des défis que nous avons résolus lors de cette session finale.
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-31 20:00" pubdate>
-              2023-10-31
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
- 
-    
- 
-
-
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Recherche</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Mot clé</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="" rel="nofollow noopener"><span>Copyright</span></a> <i class="iconfont icon-copyright"></i> <a href="" rel="nofollow noopener"><span>RedTeam-TG</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
-
-  </footer>
-
-  
-  
-  <script  src="../lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="../lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
 
   <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
 
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-<script  src="../lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
-<script  src="../lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="js/events.js" ></script>
-<script  src="js/plugins.js" ></script>
+    const letters = ['0', '1'];
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = [];
 
+    for (let x = 0; x < columns; x++) {
+      drops[x] = Math.random() * canvas.height;
+    }
 
-  <script  src="../lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
   </script>
 
-
-
-
-  
-    <script  src="js/img-lazyload.js" ></script>
-  
-
-
-
-
-  <script  src="js/local-search.js" ></script>
-
-
-
-
-
-
-<script  src="js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
-  </noscript>
+  <script>
+    // Redirection au clic
+    document.querySelector('.title').addEventListener('click', () => {
+      window.location.href = 'accueil.html';
+    });
+  </script>
 
 </body>
-
 </html>
