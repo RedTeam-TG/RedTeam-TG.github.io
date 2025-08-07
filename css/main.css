@@ -8,6 +8,10 @@
   display: none !important;
 }
 
+#color-toggle-btn {
+  display: none !important;
+}
+
 
 .member-card img {
   width: 80px;
