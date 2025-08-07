@@ -4,6 +4,11 @@
   margin: 30px auto;
 }
 
+#search-btn {
+  display: none !important;
+}
+
+
 .member-card img {
   width: 80px;
   height: 80px;
